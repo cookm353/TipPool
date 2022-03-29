@@ -11,6 +11,22 @@ describe("Servers test (with setup and tear-down)", function() {
     expect(allServers['server' + serverId].serverName).toEqual('Alice');
   });
 
+  it("shouldn't add a new server with an empty input", function() {
+    serverNameInput.value = ""
+    submitServerInfo()
+
+    expect(Object.keys(allServers).length).toEqual(0)
+  })
+
+  it("should update #serverTable on updateServerTable()", function() {
+    submitServerInfo()
+    
+    const serverTableCells = document.querySelectorAll("#serverTable tbody td")
+    expect(serverTableCells.length/2).toEqual(1)
+    expect(serverTableCells[0].innerText).toEqual("Alice")
+    expect(serverTableCells[1].innerText).toEqual("$0.00")
+  })
+
   afterEach(function() {
     const serverTable = document.querySelector("#serverTable tbody")
     
@@ -19,23 +35,3 @@ describe("Servers test (with setup and tear-down)", function() {
     serverId = 0
   });
 });
-
-describe("UpdateServerTable() tests", function() {
-  beforeEach(function() {
-    allServers = {
-      server1: {serverName: 'Otis'},
-      server2: {serverName: "Clem"},
-      server3: {serverName: "Jimmy"}
-    }
-    console.log(allServers)
-  })
-  
-  it("find the right number of servers", function() {
-    expect(updateServerTable(), )
-  })
-
-  // Make sure tip amounts have 2 numbers after a decimal point
-  afterAll(function() {
-    allServers = {}
-  })
-})
