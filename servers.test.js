@@ -20,7 +20,6 @@ describe("Servers test (with setup and tear-down)", function() {
 
   it("should update #serverTable on updateServerTable()", function() {
     submitServerInfo()
-    updateServerTable()
     
     const serverTableCells = document.querySelectorAll("#serverTable tbody td")
     console.log(serverTableCells)
