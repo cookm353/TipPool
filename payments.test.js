@@ -12,22 +12,19 @@ describe("Payments test with set up and tear down", function() {
         expect(tipPct.innerText).toEqual("10%")
     })
 
+    // Working properly!
     it("shouldn't add new payment info without a bill amount", function() {
         billAmtInput.value = ""
-
         submitPaymentInfo()
-        console.log(paymentTbody.innerHTML)
-        console.log(paymentTbody.innerHTML === undefined)
-        // expect(paymentTbody.innerHTML).toBe('')
+
         expect(paymentTbody.innerHTML.trim()).toBeFalsy()
     })
 
+    // Working properly!
     it("shouldn't add new payment info without a tip amount", function() {
         tipAmtInput.value = ""
-
         submitPaymentInfo()
-        console.log(paymentTbody.innerHTML === "")
-        console.log(paymentTbody.innerHTML)
+
         expect(paymentTbody.innerHTML.trim()).toBeFalsy()
     })
 
@@ -60,16 +57,34 @@ describe("Payments test with set up and tear down", function() {
         expect(summaryTds[2].innerText).toEqual("15%")
     })
 
-    // it("should ")
+    // Working properly!
+    it("shouldn't create a payment with empty inputs on createCurPayment()", function() {
+        billAmtInput.value = ""
+        tipAmtInput.value = ""
+        let currentPayment = createCurPayment()
+        
+        expect(currentPayment).toBeFalsy()
+    })
+
+    // Working properly!
+    it("should create a new payment on createCurPayment()", function() {
+        billAmtInput.value = 100
+        tipAmtInput.value = 15
+        
+        payment = {
+            billAmt: billAmtInput.value,
+            tipAmt: tipAmtInput.value,
+            tipPercent: calculateTipPercent(billAmtInput.value, tipAmtInput.value)
+        }
+
+        expect(createCurPayment()).toEqual(payment)
+    })
 
     afterEach(function() {
-        let summaryTbody = document.querySelector("#summaryTable tbody")
         paymentTbody.innerHTML = ""
+        for (let td of summaryTds) { td.innerText = ""}
+        
         allPayments = {}
-        summaryTbody.innerHTML = ""
-    })
-    
-    afterAll(function() {
         billAmtInput.value = ""
         tipAmtInput.value = ""
     })
