@@ -1,19 +1,6 @@
 # TipPool
 Another Jasmine testing exercise
 
-## servers.js
-* submitServerInfo()
-    * Makes a server object
-    * Adds server to allServers object
-    * Updates HTML
-    * Resets inputs
-    * Calls `updateServerTable()`
-* updateServerTable()
-    * Makes a tr
-    * Passes to appendTd() w/ input value
-    * Calls `submitPaymentTotal()` and `appendTd()`
-    * Called by `submitServerInfo()` and `submitPaymentInfo()`
-
 ## payments.js
 * submitPaymentInfo()
     * Adds curPayment to allPayments

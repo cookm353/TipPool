@@ -20,9 +20,11 @@ describe("Servers test (with setup and tear-down)", function() {
 
   it("should update #serverTable on updateServerTable()", function() {
     submitServerInfo()
+    updateServerTable()
     
     const serverTableCells = document.querySelectorAll("#serverTable tbody td")
-    expect(serverTableCells.length/2).toEqual(1)
+    console.log(serverTableCells)
+    expect(serverTableCells.length).toEqual(2)
     expect(serverTableCells[0].innerText).toEqual("Alice")
     expect(serverTableCells[1].innerText).toEqual("$0.00")
   })
